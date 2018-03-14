@@ -1,0 +1,33 @@
+acl "acl-lan" {10.203.0.0/16;};
+
+zone "doe.fr" {
+	type master;
+	file "/etc/bind/db.domain.lan";
+	allow-query {"acl-lan";};
+	allow-update {"acl-lan";};
+};
+
+zone "5.203.10.in-addr.arpa" {
+	type master;
+	file "/etc/bind/db.5.203.10.in-addr.arpa";
+	allow-query {"acl-lan";};
+	allow-update {"acl-lan";};
+};
+zone "lilian.fr" {
+	type slave;
+	masters { 10.203.0.187; };
+	file "/etc/bind/db.lilian.fr"
+};
+zone "0.203.10.in-addr.arpa"{
+	type slave;
+	masters { 10.203.0.187; };
+	file "/etc/bind/db.0.203.10.in-addr.arpa";
+};
+key "rndc-key" {
+	algorithm hmac-sha256;
+	secret "M+G0v0lxU3fPR/jShfQdhA==";
+};
+controls {
+	inet 127.0.0.1 port 953
+	allow { 127.0.0.1; } keys {"rndc-sha256";};
+};

@@ -1,0 +1,18 @@
+;
+; BIND reverse data file for broadcast zone
+;
+$TTL	604800
+$ORIGIN	5.203.10.in-addr.arpa.
+@	IN	SOA	dns.doe.fr. root.doe.fr. (
+			     20		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	dns.doe.fr.
+@	IN	NS	dns2.doe.fr.
+10.203.0.187	IN	NS	dns2.doe.fr
+10	IN	PTR	dns.doe.fr.
+15	IN	PTR	www.doe.fr.
+16	IN	PTR	mail.doe.fr.
